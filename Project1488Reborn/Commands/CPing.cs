@@ -13,17 +13,6 @@ namespace Project1488Reborn.Commands
 
         public override void Execute(HornetInc.JsonAPI.Json.Command com)
         {
-            apiManager.AddNewAnswer("Ping");
-            apiManager.AddNewAnswer("Ping");
-            apiManager.AddNewAnswer("Ping");
-            apiManager.AddNewAnswer("Ping");
-            apiManager.AddNewAnswer("Ping");
-            apiManager.AddNewAnswer("Ping");
-            apiManager.AddNewAnswer("Ping");
-            apiManager.AddNewAnswer("Ping");
-            apiManager.AddNewAnswer("Ping");
-            apiManager.AddNewAnswer("Ping");
-            apiManager.AddNewAnswer("Ping");
             if (com.Value.Length == 0)
                 apiManager.AddNewAnswer($"Pong!");
             else

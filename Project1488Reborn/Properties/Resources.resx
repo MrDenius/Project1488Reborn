@@ -118,28 +118,10 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="Google" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Google.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="InternetExplorer" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\InternetExplorer.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="ProgramStarterCode" xml:space="preserve">
-    <value>using System;
-using System.Diagnostics;
-
-namespace ProgrmStarter
-{
-	public static class Program
-	{
-		public static void Main()
-		{
-			Console.WriteLine("Запуск в оболочке...\n");
-			Process proc = new Process();
-            proc.StartInfo.FileName = "conhost.exe";
-            proc.StartInfo.Arguments = "0x4";
-            proc.StartInfo.UseShellExecute = false;
-            proc.Start();
-            proc.WaitForExit();
-		} 
-	}
-}</value>
   </data>
 </root>

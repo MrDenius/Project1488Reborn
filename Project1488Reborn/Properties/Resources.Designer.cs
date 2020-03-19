@@ -63,37 +63,20 @@ namespace Project1488Reborn.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Icon, аналогичного (Значок).
         /// </summary>
-        public static System.Drawing.Icon InternetExplorer {
+        public static System.Drawing.Icon Google {
             get {
-                object obj = ResourceManager.GetObject("InternetExplorer", resourceCulture);
+                object obj = ResourceManager.GetObject("Google", resourceCulture);
                 return ((System.Drawing.Icon)(obj));
             }
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на using System;
-        ///using System.Diagnostics;
-        ///
-        ///namespace ProgrmStarter
-        ///{
-        ///	public static class Program
-        ///	{
-        ///		public static void Main()
-        ///		{
-        ///			Console.WriteLine(&quot;Запуск в оболочке...\n&quot;);
-        ///			Process proc = new Process();
-        ///            proc.StartInfo.FileName = &quot;conhost.exe&quot;;
-        ///            proc.StartInfo.Arguments = &quot;0x4&quot;;
-        ///            proc.StartInfo.UseShellExecute = false;
-        ///            proc.Start();
-        ///            proc.WaitForExit();
-        ///		} 
-        ///	}
-        ///}.
+        ///   Поиск локализованного ресурса типа System.Drawing.Icon, аналогичного (Значок).
         /// </summary>
-        public static string ProgramStarterCode {
+        public static System.Drawing.Icon InternetExplorer {
             get {
-                return ResourceManager.GetString("ProgramStarterCode", resourceCulture);
+                object obj = ResourceManager.GetObject("InternetExplorer", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
             }
         }
     }

